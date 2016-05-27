@@ -5,8 +5,9 @@
       Bio: <input ng-model="newPersonBio">
       <button ng-click="addPerson(newPersonName, newPersonBio)">Add Person</button>
     </div>
-
-    <div ng-repeat="person in people">
+    <label>Filter by Name:</label>
+    <input ng-model="nameFilter">
+    <div ng-repeat="person in people | filter: {name: nameFilter}">
       <h2 ng-click="toggleBio(person)">{{ person.name }}</h2>
       <h3 ng-if="person.bioVisible">{{ person.bio }}</h3>
       <a href="#" ng-click="deletePerson($index)">Delete Person</a>
