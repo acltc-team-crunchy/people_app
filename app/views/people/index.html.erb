@@ -6,7 +6,13 @@
       <button ng-click="addPerson(newPersonName, newPersonBio)">Add Person</button>
     </div>
     <label>Filter by Name:</label>
-    <input ng-model="nameFilter">
+
+    <datalist id="names">
+      <option ng-repeat="person in people">{{ person.name }}</option>
+    </datalist>
+
+
+    <input ng-model="nameFilter" list="names">
     <div>
       <button ng-click="toggleOrder('name')">Order by Name</button>
       <button ng-click="toggleOrder('bio')">Order by Bio</button>
@@ -14,7 +20,7 @@
     <div ng-repeat="person in people | filter: {name: nameFilter} | orderBy: orderAttribute:descending">
       <h2 ng-click="toggleBio(person)">{{ person.name }}</h2>
       <h3 ng-if="person.bioVisible">{{ person.bio }}</h3>
-      <a href="#" ng-click="deletePerson($index)">Delete Person</a>
+      <a href="#" ng-click="deletePerson(person)">Delete Person</a>
     </div>
     Total People {{ people.length }}
   </div>
